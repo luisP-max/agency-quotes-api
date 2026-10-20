@@ -1,0 +1,18 @@
+services:
+  agency_api:
+    image: node:22
+    container_name: agency_quotes_container
+    working_dir: /usr/src/app
+    ports:
+      - "3000:3000"
+    tty: true
+    stdin_open: true
+    volumes:
+      - .:/usr/src/app
+      - /usr/src/app/node_modules
+    environment:
+      - PORT=3000
+      - API_KEYS=key-demo-one,key-demo-two
+      - DB_PATH=./data/agency.sqlite
+    command: sh -c "npm install better-sqlite3 && npm run start:dev"
+
